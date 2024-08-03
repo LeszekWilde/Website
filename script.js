@@ -77,7 +77,7 @@ function handleSubmit(event) {
 
     fetch(form.action, {
         method: form.method,
-        body: formData
+        body: new URLSearchParams(formData)
     })
     .then(response => response.text())
     .then(result => {
