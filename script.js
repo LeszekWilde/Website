@@ -20,9 +20,9 @@ const conversionFactors = {
         ounces: { grams: 28.3495, kilograms: 0.0283495, milligrams: 28349.5, micrograms: 2.83495e+7, pounds: 0.0625, ounces: 1 }
     },
     temperature: {
-        celsius: { celsius: 1, fahrenheit: 33.8, kelvin: 274.15 },
-        fahrenheit: { celsius: -17.2222, fahrenheit: 1, kelvin: 255.928 },
-        kelvin: { celsius: -272.15, fahrenheit: -457.87, kelvin: 1 }
+        celsius: { celsius: 1, fahrenheit: 1.8, kelvin: 1 },
+        fahrenheit: { celsius: 0.555556, fahrenheit: 1, kelvin: 0.555556 },
+        kelvin: { celsius: 1, fahrenheit: 1.8, kelvin: 1 }
     },
     volume: {
         liters: { liters: 1, milliliters: 1000, cubicMeters: 0.001, cubicCentimeters: 1000, gallonsUS: 0.264172, gallonsUK: 0.219969, quartsUS: 1.05669, quartsUK: 0.879876, pintsUS: 2.11338, pintsUK: 1.75975 },
@@ -62,55 +62,106 @@ const conversionFactors = {
         calories: { joules: 4.184, calories: 1, kilocalories: 0.001, btus: 0.00396832, electronvolts: 2.611e+19 },
         kilocalories: { joules: 4184, calories: 1000, kilocalories: 1, btus: 3.96832, electronvolts: 2.611e+22 },
         btus: { joules: 1055.06, calories: 252, kilocalories: 0.252, btus: 1, electronvolts: 6.11e+21 },
-        electronvolts: { joules: 1.602e-19, calories: 3.821e-20, kilocalories: 3.821e-23, btus: 1.585e-22, electronvolts: 1 }
-    },
-    power: {
-        watts: { watts: 1, kilowatts: 0.001, horsepower: 0.00134102, megawatts: 1e-6 },
-        kilowatts: { watts: 1000, kilowatts: 1, horsepower: 1.34102, megawatts: 0.001 },
-        horsepower: { watts: 745.7, kilowatts: 0.7457, horsepower: 1, megawatts: 0.0007457 },
-        megawatts: { watts: 1e+6, kilowatts: 1000, horsepower: 1341.02, megawatts: 1 }
-    },
-    time: {
-        seconds: { seconds: 1, minutes: 0.0166667, hours: 0.000277778, days: 1.15741e-5, weeks: 1.65344e-6 },
-        minutes: { seconds: 60, minutes: 1, hours: 0.0166667, days: 0.00138889, weeks: 0.000198413 },
-        hours: { seconds: 3600, minutes: 60, hours: 1, days: 0.0416667, weeks: 0.00595238 },
-        days: { seconds: 86400, minutes: 1440, hours: 24, days: 1, weeks: 0.142857 },
-        weeks: { seconds: 604800, minutes: 10080, hours: 168, days: 7, weeks: 1 }
-    }
+        electronvolts: {joules: 1.60218e-19, calories: 3.8293e-20, kilocalories: 3.8293e-23, btus: 1.60218e-22, electronvolts: 1 }
+},
+power: {
+watts: { watts: 1, kilowatts: 0.001, horsepower: 0.00134102, megawatts: 1e-6 },
+kilowatts: { watts: 1000, kilowatts: 1, horsepower: 1.34102, megawatts: 0.001 },
+horsepower: { watts: 745.7, kilowatts: 0.7457, horsepower: 1, megawatts: 0.0007457 },
+megawatts: { watts: 1e+6, kilowatts: 1000, horsepower: 1341.02, megawatts: 1 }
+},
+time: {
+seconds: { seconds: 1, minutes: 0.0166667, hours: 0.000277778, days: 1.15741e-5, weeks: 1.65344e-6 },
+minutes: { seconds: 60, minutes: 1, hours: 0.0166667, days: 0.00138889, weeks: 0.000198413 },
+hours: { seconds: 3600, minutes: 60, hours: 1, days: 0.0416667, weeks: 0.00595238 },
+days: { seconds: 86400, minutes: 1440, hours: 24, days: 1, weeks: 0.142857 },
+weeks: { seconds: 604800, minutes: 10080, hours: 168, days: 7, weeks: 1 }
+}
 };
 
 function updateUnits() {
-    const category = document.getElementById('category').value;
-    const fromUnit = document.getElementById('fromUnit');
-    const toUnit = document.getElementById('toUnit');
-    fromUnit.innerHTML = '';
-    toUnit.innerHTML = '';
+const category = document.getElementById(‘category’).value;
+const fromUnit = document.getElementById(‘fromUnit’);
+const toUnit = document.getElementById(‘toUnit’);
+fromUnit.innerHTML = ‘’;
+toUnit.innerHTML = ‘’;
 
-    const units = Object.keys(conversionFactors[category]);
+const units = Object.keys(conversionFactors[category]);
 
-    units.forEach(unit => {
-        fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
-        toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
-    });
+units.forEach(unit => {
+    fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+    toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+});
+
 }
 
 function convert() {
-    const category = document.getElementById('category').value;
-    const fromUnit = document.getElementById('fromUnit').value;
-    const toUnit = document.getElementById('toUnit').value;
-    const value = parseFloat(document.getElementById('inputValue').value);
+const category = document.getElementById(‘category’).value;
+const fromUnit = document.getElementById(‘fromUnit’).value;
+const toUnit = document.getElementById(‘toUnit’).value;
+const value = parseFloat(document.getElementById(‘inputValue’).value);
 
-    if (isNaN(value) || !fromUnit || !toUnit) {
-        alert('Please provide valid input values.');
-        return;
-    }
-
-    const factor = conversionFactors[category][fromUnit][toUnit];
-    const result = value * factor;
-    document.getElementById('result').textContent = `Result: ${result} ${toUnit}`;
+if (isNaN(value) || !fromUnit || !toUnit) {
+    alert('Please provide valid input values.');
+    return;
 }
 
-document.getElementById('category').addEventListener('change', updateUnits);
-document.getElementById('convertButton').addEventListener('click', convert);
+let result;
+if (category === 'temperature') {
+    if (fromUnit === 'celsius' && toUnit === 'fahrenheit') {
+        result = (value * 1.8) + 32;
+    } else if (fromUnit === 'fahrenheit' && toUnit === 'celsius') {
+        result = (value - 32) / 1.8;
+    } else if (fromUnit === 'celsius' && toUnit === 'kelvin') {
+        result = value + 273.15;
+    } else if (fromUnit === 'kelvin' && toUnit === 'celsius') {
+        result = value - 273.15;
+    } else if (fromUnit === 'fahrenheit' && toUnit === 'kelvin') {
+        result = ((value - 32) / 1.8) + 273.15;
+    } else if (fromUnit === 'kelvin' && toUnit === 'fahrenheit') {
+        result = ((value - 273.15) * 1.8) + 32;
+    } else {
+        result = value; // Same unit conversion
+    }
+} else {
+    const factor = conversionFactors[category][fromUnit][toUnit];
+    result = value * factor;
+}
+document.getElementById('result').textContent = `Result: ${result} ${toUnit}`;
+
+}
+
+function submitContactForm() {
+const name = document.getElementById(‘name’).value;
+const email = document.getElementById(‘email’).value;
+const message = document.getElementById(‘message’).value;
+
+if (!name || !email || !message) {
+    alert('Please fill out all fields.');
+    return;
+}
+
+fetch('/contact', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, message })
+}).then(response => response.text())
+  .then(data => {
+      document.getElementById('contactResult').classList.remove('hidden');
+      setTimeout(() => {
+          document.getElementById('contactResult').classList.add('hidden');
+      }, 3000);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+
+}
+
+document.getElementById(‘category’).addEventListener(‘change’, updateUnits);
+document.getElementById(‘convertButton’).addEventListener(‘click’, convert);
+document.getElementById(‘submitContact’).addEventListener(‘click’, submitContactForm);
 
 updateUnits();
