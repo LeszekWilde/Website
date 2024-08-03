@@ -57,6 +57,14 @@
             margin-top: 20px;
             font-size: 18px;
         }
+        .hidden {
+            display: none;
+        }
+        #contactForm {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -89,6 +97,18 @@
             <button id="convertButton">Convert</button>
 
             <p id="result">Result: </p>
+        </div>
+
+        <div id="contactForm">
+            <h2>Contact Us</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+            <label for="email">Email:</label>
+            <input type="email" id="email">
+            <label for="message">Message:</label>
+            <textarea id="message"></textarea>
+            <button id="submitContact">Submit</button>
+            <p id="contactResult" class="hidden">Contact information saved successfully!</p>
         </div>
     </div>
 
