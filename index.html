@@ -34,7 +34,7 @@
     <button onclick="convert()">Convert</button>
 
     <h2>Contact Us</h2>
-    <form id="contact-form" action="/save-contact" method="post">
+    <form id="contact-form" action="/save-contact" method="post" onsubmit="handleSubmit(event)">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         
@@ -46,6 +46,8 @@
         
         <button type="submit">Submit</button>
     </form>
+    
+    <div id="success-message" class="hidden">Contact information saved successfully!</div>
 </div>
 
 <script src="script.js"></script>
