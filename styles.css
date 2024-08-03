@@ -12,7 +12,7 @@ body {
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box;
 }
 
 h1, h2 {
@@ -32,7 +32,7 @@ label, select, input, textarea, button {
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box;
 }
 
 textarea {
