@@ -4,28 +4,26 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const HOST = '94.237.84.98';
 const PORT = 80;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname)));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint to save contact information
-app.post('/save-contact', (req, res) => {
+app.post('/contact', (req, res) => {
     const { name, email, message } = req.body;
+    if (!name || !email || !message) {
+        return res.status(400).send('All fields are required.');
+    }
     const contactInfo = `Name: ${name}\nEmail: ${email}\nMessage: ${message}\n\n`;
-
     fs.appendFile('contacts.txt', contactInfo, (err) => {
         if (err) {
-            console.error(err);
-            res.status(500).send('Internal Server Error');
-        } else {
-            res.send('Contact information saved successfully!');
+            console.error('Failed to save contact info:', err);
+            return res.status(500).send('Internal Server Error');
         }
+        res.send('Contact information saved successfully.');
     });
 });
 
-// Start the server
-app.listen(PORT, HOST, () => {
-    console.log(`Server is running on http://${HOST}:${PORT}`);
+app.listen(PORT, '94.237.84.98', () => {
+    console.log(`Server running on http://94.237.84.98:${PORT}`);
 });
