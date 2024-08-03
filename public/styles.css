@@ -1,63 +1,49 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
     background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 50px auto;
+    background: #fff;
     padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 5px;
-    box-sizing: border-box;
 }
 
 h1, h2 {
     text-align: center;
-    color: #333;
 }
 
-.unit-converter, form {
-    margin-bottom: 20px;
+.converter-box, .contact-box {
+    margin: 20px 0;
 }
 
-label, select, input, textarea, button {
-    display: block;
+.converter-box select, .converter-box input, .converter-box button, .contact-box input, .contact-box textarea, .contact-box button {
     width: 100%;
-    margin: 10px 0;
     padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 16px;
-    box-sizing: border-box;
 }
 
-textarea {
-    resize: vertical;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
+.converter-box button, .contact-box button {
+    background-color: #007BFF;
+    color: #fff;
     border: none;
     cursor: pointer;
 }
 
-button:hover {
+.converter-box button:hover, .contact-box button:hover {
     background-color: #0056b3;
 }
 
-#success-message {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
+#contactResult {
     text-align: center;
+    color: green;
 }
 
 .hidden {
